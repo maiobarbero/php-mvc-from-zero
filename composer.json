@@ -1,0 +1,20 @@
+{
+	"name": "maiobarbero/mvc",
+	"autoload": {
+		"psr-4": {
+			"Maiobarbero\\Mvc\\": "src/"
+		}
+	},
+	"authors": [
+		{
+			"name": "maiobarbero",
+			"email": "66015486+maiobarbero@users.noreply.github.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"app\\": "./"
+		}
+	},
+	"require": {}
+}
