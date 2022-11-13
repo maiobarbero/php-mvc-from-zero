@@ -1,17 +1,12 @@
-<h1>Contact US</h1>
+<h1>Login</h1>
 <form action="" method="POST">
   <div class="mb-3">
     <label class="form-label">Email address</label>
     <input type="email" class="form-control" name="email">
   </div>
   <div class="mb-3">
-    <label class="form-label">Subject</label>
-    <input type="text" class="form-control" name="subject">
+    <label class="form-label">Password</label>
+    <input type="password" class="form-control" name="password">
   </div>
-  <div class="mb-3">
-    <label class="form-label">Message</label>
-    <textarea class="form-control" name="message"></textarea>
-  </div>
-
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
