@@ -14,7 +14,8 @@ class Database
     $user = $config['user'] ?? '';
     $password = $config['password'] ?? '';
 
-    $this->pdo = new \PDO('mysql:unix_socket=/Users/maiobarbero/Library/Application Support/Local/run/YrAW4tLox/mysql/mysqld.sock;dbname=local', 'root', 'root');
+    $socket = str_replace('%20', ' ', $socket);
+    $this->pdo = new \PDO($socket, $user, $password);
     $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
   }
 

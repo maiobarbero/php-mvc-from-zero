@@ -21,7 +21,6 @@ class AuthController extends Controller
     $user = new User();
     if ($request->isPost()) {
 
-      $this->setLayout('auth');
       // Validate data and register trough User
       $user->loadData($request->getBody());
       if ($user->validate() && $user->register()) {
@@ -32,6 +31,7 @@ class AuthController extends Controller
         'model' => $user
       ]);
     }
+    $this->setLayout('auth');
     return $this->render('register', [
       'model' => $user
     ]);

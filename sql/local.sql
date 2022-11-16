@@ -27,7 +27,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,8 +36,8 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (3,'m0001_initial.php','2022-11-15 14:20:58');
-INSERT INTO `migrations` VALUES (4,'m0002_add_password_to_user.php','2022-11-15 14:24:31');
+INSERT INTO `migrations` VALUES (1,'m0001_initial.php','2022-11-15 21:22:17');
+INSERT INTO `migrations` VALUES (2,'m0002_add_password_to_user.php','2022-11-15 21:22:17');
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -77,4 +77,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-15 17:02:19
+-- Dump completed on 2022-11-16  9:41:25

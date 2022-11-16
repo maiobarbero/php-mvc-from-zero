@@ -51,6 +51,18 @@ abstract class Model
           case ($ruleName === self::MATCH && $value != $this->{$rule['match']}):
             $this->addError($attribute, self::MATCH, $rule);
             break;
+          case ($ruleName === self::UNIQUE):
+            $className = $rule['class'];
+            $att = $rule['attribute'] ?? $attribute;
+            $tableName = $className::tableName();
+            $statement = Application::$app->db->pdo->prepare("SELECT * FROM $tableName WHERE $att = :attr");
+            $statement->bindValue(":attr", $value);
+            $statement->execute();
+            $record = $statement->fetchObject();
+            if ($record) {
+              $this->addError($att, self::UNIQUE);
+            }
+            break;
 
           default:
             break;
