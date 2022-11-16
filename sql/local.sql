@@ -27,7 +27,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT INTO `migrations` VALUES (1,'m0001_initial.php','2022-11-15 21:22:17');
 INSERT INTO `migrations` VALUES (2,'m0002_add_password_to_user.php','2022-11-15 21:22:17');
+INSERT INTO `migrations` VALUES (3,'m1668588328_user_status_default.php','2022-11-16 09:04:40');
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,11 +53,11 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `nickname` varchar(255) NOT NULL,
-  `status` tinyint(4) NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `password` varchar(512) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,6 +66,12 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'test@prova.it','maiobarbero',0,'2022-11-16 09:05:12','12345678');
+INSERT INTO `users` VALUES (3,'test2@prova.it','maiobarbero',0,'2022-11-16 09:49:53','$2y$10$8KAKadcWlJtgkYzUK3UtS.2p8ILyfwz0Zh3DRU9ruwF3F9y2khKX2');
+INSERT INTO `users` VALUES (4,'test3@prova.it','maiobarbero',0,'2022-11-16 09:51:26','$2y$10$F6ZUeF5xyL9FIbhILR576.4sNcKDqBI79APGp1qOW5ceDJQI8fRni');
+INSERT INTO `users` VALUES (5,'test4@prova.it','maiobarbero',0,'2022-11-16 09:52:54','$2y$10$mjRrzPJlcNgEz.RvxaajXOR2LFAF6slFZQS04o6mQ7qgy6D6tt.L6');
+INSERT INTO `users` VALUES (6,'123@123.or','maiobarbero',0,'2022-11-16 09:53:55','$2y$10$rwNi1vzeWZBj2PJ.TkevEORwJ1PmkXcLr0Zkh7dtx0wSg8TlKviHK');
+INSERT INTO `users` VALUES (7,'1243@123.or','maiobarbero',0,'2022-11-16 09:55:39','$2y$10$UC83J1X/oaU90T/DZ5c86.oDP7JcTRHScR113o6OwiCxa.a6uF47K');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -77,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-16  9:41:25
+-- Dump completed on 2022-11-16 10:56:22

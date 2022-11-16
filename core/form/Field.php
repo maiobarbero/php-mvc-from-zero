@@ -16,11 +16,11 @@ class Field
   public string $label;
   public string $type;
 
-  public function __construct($model, $attribute, $label)
+  public function __construct($model, $attribute)
   {
     $this->model = $model;
     $this->attribute = $attribute;
-    $this->label = $label;
+    $this->label = $attribute;
     $this->type = self::TYPE_TEXT;
   }
 
@@ -44,7 +44,11 @@ class Field
       $this->model->getFirstError($this->attribute)
     );
   }
-
+  public function label($label)
+  {
+    $this->label = $label;
+    return $this;
+  }
   public function passwordField()
   {
     $this->type = self::TYPE_PASSWORD;

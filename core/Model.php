@@ -28,7 +28,6 @@ abstract class Model
     foreach ($this->rules() as $attribute => $rules) {
       $value = $this->{$attribute};
       foreach ($rules as $rule) {
-
         // Ogni $rule può essere stringa o array
         $ruleName = $rule;
         if (!is_string($ruleName)) { //$ruleName is array

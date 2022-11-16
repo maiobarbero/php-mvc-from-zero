@@ -12,13 +12,14 @@ abstract class DbModel extends Model
   {
     $tableName = $this->tableName();
     $attributes = $this->attributes();
-    $params = array_map(fn ($attribute) => ":$attribute", $attributes);
+    $params = array_map(fn ($attr) => ":$attr", $attributes);
     $statement = self::prepare("INSERT INTO $tableName (" . implode(',', $attributes) . ") VALUES(" . implode(',', $params) . ")");
 
-    foreach ($attributes as $attr) {
-      $statement->bindParam(":$attr", $this->{$attr});
+    foreach ($attributes as $attribute) {
+      $statement->bindValue(":$attribute", $this->{$attribute});
     }
     $statement->execute();
+    return true;
   }
   public static function prepare($sql)
   {

@@ -12,6 +12,7 @@ class Application
   public Request $request;
   public Response $response;
   public Controller $controller;
+  public Session $session;
 
 
   public function __construct($root, array $config)
@@ -20,6 +21,7 @@ class Application
     self::$app = $this;
     $this->request = new Request();
     $this->response = new Response();
+    $this->session = new Session();
     $this->router = new Router($this->request);
 
     $this->db = new Database($config['db']);
