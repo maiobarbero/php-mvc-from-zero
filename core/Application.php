@@ -11,11 +11,12 @@ class Application
   public Database $db;
   public Request $request;
   public Response $response;
-  public Controller $controller;
+  public ?Controller $controller = null;
   public Session $session;
   public ?DbModel $user;
 
   public string $userClass;
+  public string $layout = 'base';
 
 
   public function __construct($root, array $config)
@@ -41,7 +42,14 @@ class Application
 
   public function run()
   {
-    echo $this->router->resolve();
+    try {
+      echo $this->router->resolve();
+    } catch (\Exception $e) {
+      $this->response->setStatusCode($e->getCode());
+      echo $this->router->renderView('_error', [
+        'exception' => $e
+      ]);
+    }
   }
 
   public function getController(): Controller

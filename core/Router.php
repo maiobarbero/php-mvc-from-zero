@@ -2,6 +2,7 @@
 
 namespace app\core;
 
+use app\core\exception\NotFoundException;
 
 class Router
 {
@@ -34,10 +35,7 @@ class Router
 
     // Path not found.
     if (!$callback) {
-      Application::$app->response->setStatusCode(404);
-      $layoutContent = $this->layoutContent();
-      $viewContent = $this->renderTheView('404', []);
-      return str_replace('{{content}}', $viewContent, $layoutContent);
+      throw new NotFoundException();
     }
     // If $callback is string render the view.
     if (is_string($callback)) {
@@ -45,8 +43,15 @@ class Router
     }
     // If $callback is array create instance of controller class (It's the first element of the array).
     if (is_array($callback)) {
-      Application::$app->controller = new $callback[0];
-      $callback[0] = Application::$app->controller;
+
+      /** @var \app\core\Controller $controller */
+
+      $controller = new $callback[0]();
+      Application::$app->controller = $controller;
+      $controller->action = $callback[1];
+      foreach ($controller->getMiddlewares() as $middleware) {
+        $middleware->execute();
+      }
     }
     return call_user_func($callback, $this->request, $this->response);
   }
@@ -60,7 +65,11 @@ class Router
   // Set Base layout.
   protected function layoutContent()
   {
-    $layout = Application::$app->controller->layout;
+    $layout = Application::$app->layout;
+
+    if (Application::$app->controller) {
+      $layout = Application::$app->controller->layout;
+    }
     ob_start(); //caching output
     include_once Application::$ROOT . "/views/layouts/$layout.php";
     return ob_get_clean(); //return and clean the buff
