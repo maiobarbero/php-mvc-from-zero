@@ -1,3 +1,11 @@
+<?php
+
+/**
+ *  @var $model \app\models\User
+ */
+
+?>
+
 <h1>Register</h1>
 
 <?php $form = app\core\form\Form::beging('', 'POST');  ?>

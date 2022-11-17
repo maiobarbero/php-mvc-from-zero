@@ -1,12 +1,16 @@
+<?php
+
+/**
+ *  @var $model \app\models\User
+ */
+
+?>
+
 <h1>Login</h1>
-<form action="" method="POST">
-  <div class="mb-3">
-    <label class="form-label">Email address</label>
-    <input type="email" class="form-control" name="email">
-  </div>
-  <div class="mb-3">
-    <label class="form-label">Password</label>
-    <input type="password" class="form-control" name="password">
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+
+<?php $form = app\core\form\Form::beging('', 'POST');  ?>
+<?php echo $form->field($model, 'email')->emailField()->label('Email address'); ?>
+<?php echo $form->field($model, 'password')->passwordField()->label('Password'); ?>
+<button type="submit" class="btn btn-primary">Submit</button>
+
+<?php app\core\form\Form::end();  ?>

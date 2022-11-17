@@ -12,10 +12,11 @@ $dotenv->load();
 
 
 $config = [
-  'db' => [
-    'socket'       => $_ENV['DB_SOCKET'],
-    'user'      => $_ENV['DB_USER'],
-    'password'  => $_ENV['DB_PASSWORD'],
+  'userClass'     => \app\models\User::class,
+  'db'  => [
+    'socket'        => $_ENV['DB_SOCKET'],
+    'user'          => $_ENV['DB_USER'],
+    'password'      => $_ENV['DB_PASSWORD'],
   ]
 ];
 $app = new Application(dirname(__DIR__), $config);
@@ -28,6 +29,7 @@ $app->router->get('/login', [AuthController::class, 'login']);
 $app->router->post('/login', [AuthController::class, 'login']);
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
+$app->router->get('/logout', [AuthController::class, 'logout']); // for security better use post
 
 
 $app->run();

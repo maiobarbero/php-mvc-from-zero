@@ -70,7 +70,7 @@ abstract class Model
     }
     return empty($this->errors);
   }
-  public function addError(string $attr, string $rule, $params = [])
+  private function addError(string $attr, string $rule, $params = [])
   {
 
     $message = $this->errorMsg()[$rule] ?? '';
@@ -78,6 +78,10 @@ abstract class Model
       $message = str_replace("{{$key}}", $value, $message);
     }
     $this->errors[$attr][] = $message;
+  }
+  public function error(string $attr, string $msg)
+  {
+    $this->errors[$attr][] = $msg;
   }
   public function errorMsg()
   {

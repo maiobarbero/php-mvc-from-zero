@@ -3,8 +3,9 @@
 namespace app\models;
 
 use app\core\DbModel;
+use app\core\UserModel;
 
-class User extends DbModel
+class User extends UserModel
 {
   const STATUS_USER = 0;
   const STATUS_ADMIN = 1;
@@ -16,9 +17,14 @@ class User extends DbModel
   public string $repeat_password = '';
   public int $status = self::STATUS_USER;
 
+
   public function tableName(): string
   {
     return 'users';
+  }
+  public function primaryKey(): string
+  {
+    return 'id';
   }
   public function save()
   {
@@ -45,5 +51,9 @@ class User extends DbModel
   public function attributes(): array
   {
     return ['nickname', 'email', 'password', 'status'];
+  }
+  public function getNickname(): string
+  {
+    return $this->nickname;
   }
 }

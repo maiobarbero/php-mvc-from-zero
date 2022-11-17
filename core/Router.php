@@ -8,11 +8,14 @@ class Router
   protected array $routes = [];
 
   public Request $request;
+  public Response $response;
 
 
-  public function __construct(Request $request)
+
+  public function __construct(Request $request, Response $response)
   {
     $this->request = $request;
+    $this->response = $response;
   }
   public function get($path, $callback)
   {
@@ -45,7 +48,7 @@ class Router
       Application::$app->controller = new $callback[0];
       $callback[0] = Application::$app->controller;
     }
-    return call_user_func($callback, $this->request);
+    return call_user_func($callback, $this->request, $this->response);
   }
   // Render base layout replacing placeholder {{content}}
   public function renderView($view, $params = [])

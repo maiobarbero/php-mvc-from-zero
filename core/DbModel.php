@@ -7,6 +7,7 @@ abstract class DbModel extends Model
 {
   abstract public function tableName(): string;
   abstract public function attributes(): array;
+  abstract public function primaryKey(): string;
 
   public function save()
   {
@@ -25,5 +26,20 @@ abstract class DbModel extends Model
   {
     return
       $db = Application::$app->db->pdo->prepare($sql);
+  }
+  public function findOne($where)
+  {
+    $tableName = static::tableName();
+    $attributes = array_keys($where);
+
+    $sql = implode("AND", array_map(fn ($att) => "$att = :$att", $attributes));
+
+    $statement = Application::$app->db->pdo->prepare("SELECT * FROM $tableName WHERE $sql");
+
+    foreach ($where as $key => $value) {
+      $statement->bindValue(":$key", $value);
+    }
+    $statement->execute();
+    return $statement->fetchObject(static::class); //instance of the class
   }
 }
